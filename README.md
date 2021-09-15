@@ -1,10 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
 <p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+<img src="https://joeczubiak.com/static/06f8ecdbcb6fb858fb6a85f187c0c5bb/laravel-plus-react.png" width="600">
 </p>
 
+
 ## Laravel + React
+
+
+### 1. Создаем новый проект `lara.react.loc`
+
+    composer create-project laravel/laravel lara.react.loc
+
+### 2. Добавляем первичных настроек работы с react нам нужен пакет 
+
+    composer requere laravel/ui
+
+### 3. Обновляем node
+
+Хотя бы до 12.12
+
+### 4. Запускаем установку пакетов node.js
+
+    npm i
+
+### 5. Запускаем сборку
+
+    npm run dev
+
+### 6. Запускаем создание авторизацию на vue + инициализацию работы с React
+
+    php artisan ui react --auth
+
+Флаг `--auth` создаст файлы (контроллеры/blade) авторизации + пропишет нужные роуты.
+
+    
+------
+
+Кроме этого будут внесены изменения для фронта
+- создан пример компонента на React `resources/js/components/Example.js`
+```js     
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+function Example() {
+    return (
+        <div className="container">
+            <div className="row justify-content-center">
+                Тут контент
+            </div>
+        </div>
+    );
+}
+
+export default Example;
+```
+
+и в этом же файле ниже его инициализация
+
+```js
+if (document.getElementById('example')) {
+    ReactDOM.render(<Example />, document.getElementById('example'));
+}
+```
+
+- подключен экземпляр в `resources/js/app.js`
+
+ ```js     
+ require('./components/Example');
+ ```
+
+- добавлены следующие пакеты npm
+  - @babel/preset-react
+  - bootstrap
+  - jquery
+  - popper.js
+  - react
+  - react-dom
+  - sass
+  - sass-loader
+
+- подключены в `resources/js/bootstrap.js`
+```js
+try {
+  window.Popper = require('popper.js').default;
+  window.$ = window.jQuery = require('jquery');
+    
+  require('bootstrap');
+} catch (e) { }
+```
+
+
+### 7. Запускаем сборку
+
+    npm run watch-poll
+
+### 8. Подключаем скрипты и компоненты на страницы
+
+Далее нам надо подключить все скрипты и стили в шаблоне Blade
+
+```html
+<script src="{{ asset('js/app.js') }}" defer></script>
+
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+```
+
+и в нужных места добавлять теги с ID для подключения компонента
+```html
+<div id="example"></div>
+```
