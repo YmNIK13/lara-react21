@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://joeczubiak.com/static/06f8ecdbcb6fb858fb6a85f187c0c5bb/laravel-plus-react.png" width="600">
+<img src="https://miro.medium.com/max/1298/1*6bdJkpREgbNCtvQ4zFmcGg.png" width="600">
 </p>
 
 
@@ -32,7 +32,9 @@
 
 Флаг `--auth` создаст файлы (контроллеры/blade) авторизации + пропишет нужные роуты.
 
-    
+
+[тут подробней](https://laravel.com/docs/7.x/frontend)
+
 ------
 
 Кроме этого будут внесены изменения для фронта
