@@ -22,7 +22,7 @@
             },
             // redirect: 'follow', // manual, *follow, error
             // referrerPolicy: 'no-referrer', // no-referrer, *client
-            // body: JSON.stringify(data) // body data type must match "Content-Type" header
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
         });
         return await response.json(); // parses JSON response into native JavaScript objects
     }
@@ -35,6 +35,15 @@
     postData('http://lara.react.loc/api/user', {answer: 42})
         .then((data) => {
             console.log(data); // JSON data parsed by `response.json()` call
+        });
+
+
+    postData('http://ormr.sand700.fun/api/login', {
+        "email": "aa@admin.com",
+        "password": "generatepassword"
+    })
+        .then((data) => {
+            console.log('login Vlad',data); // JSON data parsed by `response.json()` call
         });
 </script>
 </body>
