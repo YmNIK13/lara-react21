@@ -9,30 +9,32 @@
 
 <script>
     // Пример отправки POST запроса:
-    async function postData(url = '', data = {}) {
+    async function postData(url = '', data = {}, headers = {}) {
         // Default options are marked with *
         const response = await fetch(url, {
             method: 'POST', // *GET, POST, PUT, DELETE, etc.
             // mode: 'cors', // no-cors, *cors, same-origin
             // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
             // credentials: 'same-origin', // include, *same-origin, omit
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + '37|A8calhwDmHKOiCdsByhIIO2ZxPrChtxgyTB7ILLc',
-            },
-            // redirect: 'follow', // manual, *follow, error
+            headers: headers,
+            redirect: 'follow', // manual, *follow, error
             // referrerPolicy: 'no-referrer', // no-referrer, *client
             body: JSON.stringify(data) // body data type must match "Content-Type" header
         });
         return await response.json(); // parses JSON response into native JavaScript objects
     }
 
-    postData(`http://lara.react.loc/api/login?email=vasja@gmail.com&password=123456789`)
+    postData(`http://lara.react.loc/api/login?email=vasja@gmail.com&password=123456789`, {}, {
+        'Content-Type': 'application/json',
+    })
         .then((data) => {
             console.log('login', data); // JSON data parsed by `response.json()` call
         });
 
-    postData('http://lara.react.loc/api/user', {answer: 42})
+    postData('http://lara.react.loc/api/user', {answer: 42}, {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + '37|A8calhwDmHKOiCdsByhIIO2ZxPrChtxgyTB7ILLc',
+    })
         .then((data) => {
             console.log(data); // JSON data parsed by `response.json()` call
         });
@@ -41,10 +43,15 @@
     postData('http://ormr.sand700.fun/api/login', {
         "email": "aa@admin.com",
         "password": "generatepassword"
+    }, {
+        'Content-Type': 'application/json',
     })
         .then((data) => {
-            console.log('login Vlad',data); // JSON data parsed by `response.json()` call
-        });
+            console.log('login Vlad', data); // JSON data parsed by `response.json()` call
+        }).catch(err => {
+
+        console.log('err Vlad', err); // JSON data parsed by `response.json()` call
+    }) ;
 </script>
 </body>
 </html>
